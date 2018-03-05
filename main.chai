@@ -1,0 +1,38 @@
+global controller
+global background
+global buttons = [
+	"a", "b", "x", "y",
+	"up", "down", "left", "right",
+	"leftshoulder", "rightshoulder",
+	"select", "start"
+]
+global controllermasks = []
+
+def conf(t) {
+	t.window.width = 1000
+	t.window.height = 1000
+}
+
+def load() {
+	background = love.graphics.newImage("images/background.jpg")
+	controller = love.graphics.newImage("images/controller.png")
+
+  // Load all graphics for the button masks.
+	for (buttonName : buttons) {
+		var name = "images/controller-" + buttonName + ".png"
+		controllermasks.push_back(love.graphics.newImage(name))
+	}
+}
+
+def draw() {
+	// Draw the static backgrounds.
+	love.graphics.draw(background, 0, 0)
+	love.graphics.draw(controller, 0, 0)
+
+	// Draw the button masks.
+	for (var i = 0; i < buttons.size(); ++i) {
+		if (love.joystick.isDown(0, buttons[i])) {
+			love.graphics.draw(controllermasks[i], 0, 0)
+		}
+	}
+}
