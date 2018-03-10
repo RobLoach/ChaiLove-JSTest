@@ -1,6 +1,6 @@
 # ChaiLove Joystick Test
 
-Simple ChaiLove Joystick test application. This lets you find out which buttons are detected and pressed through ChaiLove.
+Simple [ChaiLove](http://github.com/libretro/libretro-chailove) Joystick test application. This lets you find out which buttons are detected and pressed through ChaiLove.
 
 ![Screenshot](screenshot.png)
 

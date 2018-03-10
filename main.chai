@@ -28,13 +28,13 @@ def load() {
 
 def draw() {
 	// Draw the static backgrounds.
-	love.graphics.draw(background, 0, 0)
-	love.graphics.draw(controller, 0, 0)
+	love.graphics.draw(background)
+	love.graphics.draw(controller)
 
 	// Draw the button masks.
 	for (var i = 0; i < buttons.size(); ++i) {
 		if (love.joystick.isDown(0, buttons[i])) {
-			love.graphics.draw(controllermasks[i], 0, 0)
+			love.graphics.draw(controllermasks[i])
 		}
 	}
 
