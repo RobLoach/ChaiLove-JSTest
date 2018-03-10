@@ -7,6 +7,8 @@ global buttons = [
 	"select", "start"
 ]
 global controllermasks = []
+global keys = []
+global mouseButtons = []
 
 def conf(t) {
 	t.window.width = 1000
@@ -17,7 +19,7 @@ def load() {
 	background = love.graphics.newImage("images/background.jpg")
 	controller = love.graphics.newImage("images/controller.png")
 
-  // Load all graphics for the button masks.
+	// Load all graphics for the button masks.
 	for (buttonName : buttons) {
 		var name = "images/controller-" + buttonName + ".png"
 		controllermasks.push_back(love.graphics.newImage(name))
@@ -35,4 +37,52 @@ def draw() {
 			love.graphics.draw(controllermasks[i], 0, 0)
 		}
 	}
+
+	// Display status of Keyboard input.
+	var font = love.graphics.getFont()
+	if (keys.size() > 0) {
+		var keysDown = ""
+		for (key : keys) {
+			keysDown += key + " "
+		}
+		love.graphics.print("Keyboard: " + keysDown, 100, love.graphics.getHeight() - font.getHeight() * 3)
+	}
+
+	// Display status of Mouse input.
+	var mouse = love.mouse.getPosition()
+	if (mouse.x > 0) {
+		var mouseOutput = "Mouse: " + to_string(mouse.x) + "x" + to_string(mouse.y) + " "
+		for (mouseButton : mouseButtons) {
+			mouseOutput += mouseButton + " "
+		}
+		love.graphics.print(mouseOutput, 100, love.graphics.getHeight() - font.getHeight() * 4)
+	}
+}
+
+def keypressed(key, scancode) {
+	keys.push_back(key)
+}
+
+def keyreleased(key, scancode) {
+	var newKeys = []
+	for (theKey : keys) {
+		if (theKey != key) {
+			newKeys.push_back(theKey)
+		}
+	}
+	keys = newKeys
+}
+
+def mousepressed(x, y, button) {
+	mouseButtons.push_back(button)
+}
+
+def mousereleased(x, y, button) {
+	var newButtons = []
+	for (theButton : mouseButtons) {
+		if (theButton != button) {
+			newButtons.push_back(theButton)
+		}
+	}
+	mouseButtons = newButtons
 }
