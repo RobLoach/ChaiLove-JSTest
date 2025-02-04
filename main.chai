@@ -2,7 +2,7 @@ global controller
 global background
 global buttons = [
 	"a", "b", "x", "y",
-	"up", "down", "left", "right",
+	"dpup", "dpdown", "dpleft", "dpright",
 	"leftshoulder", "rightshoulder",
 	"select", "start"
 ]
@@ -10,15 +10,8 @@ global controllermasks = []
 global keys = []
 global mouseButtons = []
 
-def conf(t) {
-	t.window.width = 1000
-	t.window.height = 1000
-	t.version = "0.17.0"
-	t.console = true
-}
-
 def load() {
-	background = love.graphics.newImage("images/background.jpg")
+	background = love.graphics.newImage("images/background.png")
 	controller = love.graphics.newImage("images/controller.png")
 
 	// Load all graphics for the button masks.
